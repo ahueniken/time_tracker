@@ -9,26 +9,19 @@ using Microsoft.Phone.Shell;
 using TimeTracker.Resources;
 using TimeTracker.ViewModels;
 
+using TimeTracker.Models;
+
+
 namespace TimeTracker
 {
     public partial class App : Application
     {
-        private static MainViewModel viewModel = null;
 
-        /// <summary>
-        /// A static ViewModel used by the views to bind against.
-        /// </summary>
-        /// <returns>The MainViewModel object.</returns>
-        public static MainViewModel ViewModel
+        // The static ViewModel, to be used across the application.
+        private static TrackedHourViewModel viewModel;
+        public static TrackedHourViewModel ViewModel
         {
-            get
-            {
-                // Delay creation of the view model until necessary
-                if (viewModel == null)
-                    viewModel = new MainViewModel();
-
-                return viewModel;
-            }
+            get { return viewModel; }
         }
 
         /// <summary>
@@ -73,6 +66,34 @@ namespace TimeTracker
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            // Specify the local database connection string.
+            string DBConnectionString = "Data Source=isostore:/TrackedHour.sdf";
+
+            // Create the database if it does not exist.
+            using (TrackedHourDataContext db = new TrackedHourDataContext(DBConnectionString))
+            {
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+
+                    // Prepopulate the categories.
+                    db.Categories.InsertOnSubmit(new Category { Name = "Home" });
+                    db.Categories.InsertOnSubmit(new Category { Name = "Work" });
+                    db.Categories.InsertOnSubmit(new Category { Name = "Hobbies" });
+
+                    // Save categories to the database.
+                    db.SubmitChanges();
+                }
+            }
+
+            // Create the ViewModel object.
+            viewModel = new TrackedHourViewModel(DBConnectionString);
+
+            // Query the local database and load observable collections.
+            viewModel.LoadCollectionsFromDatabase();
+    
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -85,11 +106,7 @@ namespace TimeTracker
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            // Ensure that application state is restored appropriately
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+           
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -243,5 +260,6 @@ namespace TimeTracker
                 throw;
             }
         }
+
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TimeTracker.Resources;
 using TimeTracker.ViewModels;
+using TimeTracker.Models;
 
 namespace TimeTracker
 {
@@ -18,7 +19,7 @@ namespace TimeTracker
         public MainPage()
         {
             InitializeComponent();
-
+           
             // Set the data context of the LongListSelector control to the sample data
             DataContext = App.ViewModel;
 
@@ -29,10 +30,10 @@ namespace TimeTracker
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            //if (!App.ViewModel.IsDataLoaded)
+            //{
+            //    App.ViewModel.LoadData();
+            //}
         }
 
         // Handle selection changed on LongListSelector
@@ -43,7 +44,7 @@ namespace TimeTracker
                 return;
 
             // Navigate to the new page
-            NavigationService.Navigate(new Uri("/DetailsPage.xaml?selectedItem=" + (MainLongListSelector.SelectedItem as ItemViewModel).ID, UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/DetailsPage.xaml?selectedItem=" + (MainLongListSelector.SelectedItem as CategoryViewModel).ID, UriKind.Relative));
 
             // Reset selected item to null (no selection)
             MainLongListSelector.SelectedItem = null;
