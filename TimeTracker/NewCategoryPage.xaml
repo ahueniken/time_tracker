@@ -30,22 +30,28 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
             <TextBlock Text="Name of Category"></TextBlock>
-            <TextBox Height="100"></TextBox>
+            <TextBox x:Name="newCategoryName" Height="100"></TextBox>
             </StackPanel>
         </Grid>
 
-        <phone:PhoneApplicationPage.ApplicationBar>
-            <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-
-                <shell:ApplicationBarIconButton 
-                IconUri="/Images/appbar.add.rest.png" 
-                Text="add" 
-                x:Name="newTaskAppBarButton" 
-                Click="newTaskAppBarButton_Click"/>
-
-            </shell:ApplicationBar>
-        </phone:PhoneApplicationPage.ApplicationBar>
+       
         
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
 
+            <shell:ApplicationBarIconButton 
+                x:Name="appBarOkButton" 
+                IconUri="/Assets/check.png" 
+                Text="ok" 
+                Click="appBarOkButton_Click"/>
+
+            <shell:ApplicationBarIconButton 
+                x:Name="appBarCancelButton" 
+                IconUri="/Assets/cancel.png" 
+                Text="cancel" 
+                Click="appBarCancelButton_Click"/>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

@@ -50,5 +50,10 @@ namespace TimeTracker
             MainLongListSelector.SelectedItem = null;
         }
 
+        private void newCategoryAppBarButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NewCategoryPage.xaml", UriKind.Relative));
+        }
+
     }
 }
