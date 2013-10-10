@@ -8,6 +8,13 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:TimeTracker" x:Key="LocalizedStrings"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#555559" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="LineHeight" Value="28"/>
+            <Setter Property="FontFamily" Value="Segoe WP" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

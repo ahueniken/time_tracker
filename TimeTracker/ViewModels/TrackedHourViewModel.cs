@@ -71,7 +71,12 @@ namespace TimeTracker.ViewModels
         {
             // Add a to-do item to the data context.
             trackedHourDB.Items.InsertOnSubmit(newTrackedHourItem);
-
+            foreach (Category category in trackedHourDB.Categories)
+	        {
+		        if (category == newTrackedHourItem.Category)
+                    category.Count += 1;
+	        }
+          
             // Save changes to the database.
             trackedHourDB.SubmitChanges();
 

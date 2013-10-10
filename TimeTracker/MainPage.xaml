@@ -9,12 +9,13 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    Foreground="#555555"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="#04396C">
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="White" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,8 +23,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="TIME TRACKER" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Monthly Hours" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="TIME TRACKER" FontFamily="Segoe WP" FontWeight="SemiBold" Foreground="#04396C"/>
+            <TextBlock Text="Monthly Hours" FontFamily="Segoe WP" FontSize="60" FontWeight="Light"/>
         </StackPanel>
 
         <!--ContentPanel contains LongListSelector and LongListSelector ItemTemplate. Place additional content here-->
@@ -32,12 +33,13 @@
                 x:Name="MainLongListSelector" 
                 Margin="0,0,-12,0" 
                 ItemsSource="{Binding CategoriesList}" 
-                SelectionChanged="MainLongListSelector_SelectionChanged">
+                SelectionChanged="MainLongListSelector_SelectionChanged"
+                Foreground="#555555">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                      <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                          <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            <TextBlock Text="{Binding Count}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                      <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                          <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="36"/>
+                          <TextBlock Text="{Binding Count}" TextWrapping="Wrap" FontSize="36" Margin="24,0,0,0" FontWeight="SemiBold"/>
                       </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
@@ -46,13 +48,18 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" BackgroundColor="#DDDDDD" ForegroundColor="#333340">
 
             <shell:ApplicationBarIconButton 
-                IconUri="/Assets/add.png" 
-                Text="add" 
+                IconUri="/Assets/edit.png" 
+                Text="categories" 
                 x:Name="newCategoryAppBarButton" 
                 Click="newCategoryAppBarButton_Click"/>
+            <shell:ApplicationBarIconButton 
+                IconUri="/Assets/add.png" 
+                Text="track hour" 
+                x:Name="trackHourAppBarButton" 
+                Click="trackHourAppBarButton_Click"/>
 
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

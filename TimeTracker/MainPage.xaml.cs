@@ -55,5 +55,10 @@ namespace TimeTracker
             NavigationService.Navigate(new Uri("/NewCategoryPage.xaml", UriKind.Relative));
         }
 
+        private void trackHourAppBarButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TrackHoursPage.xaml", UriKind.Relative));
+        }
+
     }
 }
